@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Program</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Number Guessing Program</h1>
+    <input type="number" id="userInput" placeholder="Enter a number">
+    <button onclick="playGame()">Guess</button>
+    <p id="feedback"></p>
+    <p id="attempts"></p>
+
+    <script>
+        let target = Math.floor(Math.random() * 10) + 1;
+        let count = 0;
+
+        function playGame() {
+            const userGuess = parseInt(document.getElementById('userInput').value);
+            const feedback = document.getElementById('feedback');
+            const attempts = document.getElementById('attempts');
+
+            count++;
+
+            if (userGuess === target) {
+                feedback.textContent = "Congratulations! You guessed it right.";
+                attempts.textContent = `Attempts: ${count}`;
+            } else if (userGuess < target) {
+                feedback.textContent = "Too low! Try again.";
+                attempts.textContent = `Attempts: ${count}`;
+            } else if (userGuess > target) {
+                feedback.textContent = "Too high! Try again.";
+                attempts.textContent = `Attempts: ${count}`;
+            } else {
+                feedback.textContent = "Please enter a valid number.";
+            }
+        }
+    </script>
+</body>
+</html>
