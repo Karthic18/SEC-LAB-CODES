@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Task Manager</title>
+</head>
+<body>
+  <h2>Task Manager</h2>
+  <p id="output"></p>
+
+  <script>
+    let tasks = [];
+
+    const printTasks = () => {
+      document.getElementById("output").innerHTML = "Tasks:<br>" + tasks.map((t, i) => `${i + 1}. ${t}`).join("<br>");
+    };
+
+    const addTask = (task, callback) => {
+      tasks.push(task);
+      callback();
+    };
+
+    const greet = () => document.write("Welcome to Task Manager!<br>");
+    const farewell = () => document.write("<br>Thanks for using Task Manager!");
+
+    greet();
+    addTask("Play cricket", printTasks);
+    addTask("Do homework", printTasks);
+    addTask("Read a book", printTasks);
+    farewell();
+  </script>
+</body>
+</html>
