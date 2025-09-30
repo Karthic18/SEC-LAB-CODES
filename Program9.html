@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .slider {
+      position: relative;
+      width: 600px;
+      max-width: 90%;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .slider-image {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+    <div class="slider">
+        <img src="./image1.jpg" class="slider-image" alt="Image 1" id="numberBox">
+        <button id="next">Next</button>
+        <button id="prev">Previous</button>
+    </div>
+    <script>
+        let numbers=["image1.jpg","image2.jpg","image3.jpg"];
+        console.log(numbers.length);
+        let currentIndex=0
+
+        let numbersBox=document.getElementById("nextBox");
+        let previous=document.getElementById("prev");
+        let nextBtn=document.getElementById("next");
+
+        nextBtn.addEventListener("click",()=>{
+            currentIndex = (currentIndex + 1)%numbers.length;
+            numberBox.src=numbers[currentIndex];
+        })
+
+        previous.addEventListener("click",()=>{
+            currentIndex=(currentIndex -1 + numbers.length)% numbers.length;
+            numberBox.src=numbers[currentIndex];
+        })
+
+        // setInterval(() => {
+        //     currentIndex=(currentIndex+1)%numbers.length;
+        //     numberBox.src=numbers[currentIndex];
+        // }, 2000);
+    </script>
+</body>
+</html>
