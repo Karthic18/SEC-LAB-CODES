@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizontal Car Layout</title>
+  <style>
+    /* Center the container in the page */
+    body {
+  display: flex;
+  justify-content: center; /* center container horizontally */
+  margin: 0;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+#container {
+  border: 2px solid black;
+  width: 600px;
+  display: flex;
+  flex-direction: column; /* stack car/product blocks vertically */
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  max-height: 90vh; /* allow container to grow but not exceed viewport */
+  overflow-y: auto;  /* scroll if content exceeds height */
+}
+
+.car-item {
+  display: flex; /* horizontal layout: name + image + info */
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.car-item h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.car-item img {
+  height: 100px;
+  border-radius: 8px;
+}
+
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="index.js"></script>
+</body>
+</html>
+
+
+
+//index.js
+
+const con = document.getElementById("container");
+// 1?? Render local car data
+const mydata = [
+  { name: "Shelby", image: "https://cdn.motor1.com/images/mgl/9mZpXv/s3/2020-2022-ford-mustang-shelby-gt500kr.jpg", power: "760hp" },
+  { name: "Ferrari", image: "https://cdn.classic-trader.com/I/images/300_225_inset/vehicle_ad_standard_image_fe58360bb8984733b8b22feeff3cbd11.jpg", power: "800hp" },
+  { name: "Mustang", image: "https://media.ed.edmunds-media.com/ford/mustang/2026/oem/2026_ford_mustang_coupe_dark-horse_fq_oem_1_1280.jpg", power: "450hp" }
+];
+
+mydata.forEach(car => {
+  con.innerHTML += `
+    <div class="car-item">
+      <h1>${car.name}</h1>
+      <img src="${car.image}" />
+      <h3>Power: ${car.power}</h3>
+    </div>
+  `;
+});
+
+// 2?? Fetch products and append
+fetch('https://fakestoreapi.com/products')
+  .then(res => res.json())
+  .then(data => {
+    data.forEach(product => {
+      con.innerHTML += `
+        <div class="car-item">
+          <h1>${product.title}</h1>
+          <img src="${product.image}" />
+          <h3>Price: $${product.price}</h3>
+        </div>
+      `;
+    });
+  })
+  .catch(err => console.error(err));
